@@ -12,6 +12,7 @@ public class AviaSoulsTest {
     Ticket ticket4 = new Ticket("London", "Los Angeles", 200, 12, 16);
     Ticket ticket5 = new Ticket("Yerevan", "Los Angeles", 600, 6, 10);
     Ticket ticket6 = new Ticket("Prague", "Lisbon", 550, 10, 22);
+    Ticket ticket7 = new Ticket("Prague", "Lisbon", 700, 10, 22);
 
 
     @Test
@@ -42,7 +43,7 @@ public class AviaSoulsTest {
     }
 
     @Test
-    public void shouldTestSearchWithCompare() {
+    public void shouldTestSearchWithCompare1() {
 
         AviaSouls aSouls = new AviaSouls();
 
@@ -60,7 +61,44 @@ public class AviaSoulsTest {
     }
 
     @Test
-    public void shouldTestSearchWithComparator() {
+    public void shouldTestSearchWithCompare2() {
+
+        AviaSouls aSouls = new AviaSouls();
+
+        aSouls.add(ticket1);
+        aSouls.add(ticket2);
+        aSouls.add(ticket3);
+        aSouls.add(ticket4);
+        aSouls.add(ticket5);
+        aSouls.add(ticket6);
+
+        Ticket[] actual = aSouls.search("Moscow", "Lisbon");
+        Ticket[] expected = {};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldTestSearchWithCompare3() {
+
+        AviaSouls aSouls = new AviaSouls();
+
+        aSouls.add(ticket1);
+        aSouls.add(ticket2);
+        aSouls.add(ticket3);
+        aSouls.add(ticket4);
+        aSouls.add(ticket5);
+        aSouls.add(ticket6);
+
+        Ticket[] actual = aSouls.search("London", "Los Angeles");
+        Ticket[] expected = {ticket4};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+
+    @Test
+    public void shouldTestSearchWithComparator1() {
 
         TicketTimeComparator timeComparator = new TicketTimeComparator();
 
@@ -75,6 +113,68 @@ public class AviaSoulsTest {
 
         Ticket[] actual = aSouls.searchAndSortBy("Yerevan", "Los Angeles", timeComparator);
         Ticket[] expected = {ticket5, ticket1, ticket2};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldTestSearchWithComparator2() {
+
+        TicketTimeComparator timeComparator = new TicketTimeComparator();
+
+        AviaSouls aSouls = new AviaSouls();
+
+        aSouls.add(ticket1);
+        aSouls.add(ticket2);
+        aSouls.add(ticket3);
+        aSouls.add(ticket4);
+        aSouls.add(ticket5);
+        aSouls.add(ticket6);
+
+        Ticket[] actual = aSouls.searchAndSortBy("London", "Los Angeles", timeComparator);
+        Ticket[] expected = {ticket4};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldTestSearchWithComparator3() {
+
+        TicketTimeComparator timeComparator = new TicketTimeComparator();
+
+        AviaSouls aSouls = new AviaSouls();
+
+        aSouls.add(ticket1);
+        aSouls.add(ticket2);
+        aSouls.add(ticket3);
+        aSouls.add(ticket4);
+        aSouls.add(ticket5);
+        aSouls.add(ticket6);
+
+        Ticket[] actual = aSouls.searchAndSortBy("Moscow", "Lisbon", timeComparator);
+        Ticket[] expected = {};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+
+    @Test
+    public void shouldTestSearchWithComparatorEquals() {
+
+        TicketTimeComparator timeComparator = new TicketTimeComparator();
+
+        AviaSouls aSouls = new AviaSouls();
+
+        aSouls.add(ticket1);
+        aSouls.add(ticket2);
+        aSouls.add(ticket3);
+        aSouls.add(ticket4);
+        aSouls.add(ticket5);
+        aSouls.add(ticket6);
+        aSouls.add(ticket7);
+
+        Ticket[] actual = aSouls.searchAndSortBy("Prague", "Lisbon", timeComparator);
+        Ticket[] expected = {ticket6, ticket7};
 
         Assertions.assertArrayEquals(expected, actual);
     }
