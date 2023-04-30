@@ -179,4 +179,60 @@ public class AviaSoulsTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void shouldTestSearchWithAllFind() {
+
+        AviaSouls aSouls = new AviaSouls();
+
+        aSouls.add(ticket1);
+        aSouls.add(ticket2);
+        aSouls.add(ticket3);
+        aSouls.add(ticket4);
+        aSouls.add(ticket5);
+        aSouls.add(ticket6);
+
+        Ticket[] actual = aSouls.findAll();
+        Ticket[] expected = {ticket1, ticket2, ticket3, ticket4, ticket5, ticket6};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldTestSearchWithWrongToForSearch() {
+
+        AviaSouls aSouls = new AviaSouls();
+
+        aSouls.add(ticket1);
+        aSouls.add(ticket2);
+        aSouls.add(ticket3);
+        aSouls.add(ticket4);
+        aSouls.add(ticket5);
+        aSouls.add(ticket6);
+
+        Ticket[] actual = aSouls.search("Yerevan", "New York");
+        Ticket[] expected = {};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shouldTestSearchWithWrongToForSearchAndSortBy() {
+
+        TicketTimeComparator timeComparator = new TicketTimeComparator();
+
+        AviaSouls aSouls = new AviaSouls();
+
+        aSouls.add(ticket1);
+        aSouls.add(ticket2);
+        aSouls.add(ticket3);
+        aSouls.add(ticket4);
+        aSouls.add(ticket5);
+        aSouls.add(ticket6);
+        aSouls.add(ticket7);
+
+        Ticket[] actual = aSouls.searchAndSortBy("Prague", "Los Angeles", timeComparator);
+        Ticket[] expected = {};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
 }
